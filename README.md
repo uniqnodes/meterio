@@ -25,6 +25,13 @@
 ## Meter Docker Image için otomatik güncellemeyi ayarlama
 `docker run -d --name watchtower --restart always -v /var/run/docker.sock:/var/run/docker.sock containrrr/watchtower --include-stopped --revive-stopped --enable-lifecycle-hooks --interval 10 --cleanup meter`  
 
+## Gerekli portlar  
+8669  
+8670-8671  
+55555  
+11235  
+9100  
+
 ## Güncel masaüstü cüzdanı  
 https://www.meter.io/wallets/  
 
