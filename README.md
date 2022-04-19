@@ -14,16 +14,15 @@
 `sudo chmod 666 /var/run/docker.sock`  
 
 ## Node kurulumu  
-`mkdir meter-data`  
-`cd meter-data`  
-`echo "export METER_DATA_PATH=$PWD" >> ~/.bashrc`  
+`mkdir meter_main_data`  
+`cd meter_main_data/`  
+`echo export "METER_MAIN_DATA_PATH=$PWD" >> ~/.bashrc`  
 `source ~/.bashrc`  
-`docker pull dfinlab/meter-allin:latest`  
-`docker run --network host --name meter --restart always -e NETWORK="warringstakes" -v $METER_DATA_PATH:/pos -d dfinlab/meter-allin:latest`  
-`docker container start meter`  
+`docker run --network host --name meter_main --restart always -e NETWORK="main" -v $METER_MAIN_DATA_PATH:/pos -d meterio/mainnet:latest`  
+`docker container start meter_main`  
 
 ## Meter Docker Image için otomatik güncellemeyi ayarlama
-`docker run -d --name watchtower --restart always -v /var/run/docker.sock:/var/run/docker.sock containrrr/watchtower --include-stopped --revive-stopped --enable-lifecycle-hooks --interval 10 --cleanup meter`  
+`docker run -d --name watchtower --restart always -v /var/run/docker.sock:/var/run/docker.sock containrrr/watchtower --include-stopped --revive-stopped --enable-lifecycle-hooks --interval 10 --cleanup meter_main`  
 
 ## Gerekli portlar  
 8669  
@@ -39,18 +38,18 @@ https://www.meter.io/wallets/
 * Cüzdanı açtıktan sonra SETTINGS menüsüne girin  
 * Nodes listesinin sağ üstündeki + butonuna basarak yeni node ekleme penceresini açın  
 * Açılan pencerede;  
-  Name yerine `Warring Satakes`  
+  Name yerine `Bağlanacağınız noda vermek istediğiniz isim`  
   URL yerine `http://<IP>:8669`  
   yazın ve SAVE ile kaydedin  
 * Adres satırının solundaki MAINNET yazan yere tıklayın  
-* Açılan listeden "DEVNET - Warring Stakes"i seçerek üzerinde çalışacağımız wallet penceresini açın (TESTNET - Warringstakes DEĞİL!) (öncekini kapatabilirsiniz)  
+* Açılan listeden "Mainnet - <Node_Name>"i seçerek üzerinde çalışacağımız wallet penceresini açın (öncekini kapatabilirsiniz)  
 * WALLET menüsünde NEW butonuna basarak yeni wallet oluşturun  
 
 ![alt text](https://raw.githubusercontent.com/meterio/WarringStakes/master/addnode.png)
 ![alt text](https://raw.githubusercontent.com/meterio/WarringStakes/master/connectnode.png)
 
 ## Cüzdanda stake başlatma  
-* https://faucet-warringstakes.meter.io/ adresinden faucet alın  
+* https://faucet.meter.io/ adresinden faucet alın  
 * CANDIDATES menüsüne girin  
 * LIST ME AS CANDIDATE buyonuna basın  
 * Açılan sayfada şu bilgileri girerek stake başlatın;  
